@@ -74,7 +74,7 @@ func Convert_config_ControllerConfiguration_To_v1alpha1_ControllerConfiguration(
 }
 
 func autoConvert_v1alpha1_GVisorConfiguration_To_config_GVisorConfiguration(in *GVisorConfiguration, out *config.GVisorConfiguration, s conversion.Scope) error {
-	out.ConfigFlags = (*map[string]string)(unsafe.Pointer(in.ConfigFlags))
+	out.ConfigFlags = (*map[string]interface{})(unsafe.Pointer(in.ConfigFlags))
 	return nil
 }
 
@@ -84,7 +84,7 @@ func Convert_v1alpha1_GVisorConfiguration_To_config_GVisorConfiguration(in *GVis
 }
 
 func autoConvert_config_GVisorConfiguration_To_v1alpha1_GVisorConfiguration(in *config.GVisorConfiguration, out *GVisorConfiguration, s conversion.Scope) error {
-	out.ConfigFlags = (*map[string]string)(unsafe.Pointer(in.ConfigFlags))
+	out.ConfigFlags = (*map[string]interface{})(unsafe.Pointer(in.ConfigFlags))
 	return nil
 }
 

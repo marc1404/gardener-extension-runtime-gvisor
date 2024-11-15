@@ -109,7 +109,7 @@ string
 <td>
 <code>configFlags</code></br>
 <em>
-map[string]string
+map[string]interface{}
 </em>
 </td>
 <td>
