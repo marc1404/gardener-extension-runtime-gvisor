@@ -10,6 +10,7 @@ import (
 	componentbaseconfig "k8s.io/component-base/config"
 )
 
+// +k8s:deepcopy-gen=true
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // ControllerConfiguration defines the configuration for the GVisor runtime extension.
