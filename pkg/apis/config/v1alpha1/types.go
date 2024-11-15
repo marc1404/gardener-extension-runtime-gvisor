@@ -1,9 +1,11 @@
 package v1alpha1
 
-import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+import (
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
+)
 
 // +genclient
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // GVisorConfiguration defines the configuration for the gVisor runtime extension.
 type GVisorConfiguration struct {
@@ -11,5 +13,20 @@ type GVisorConfiguration struct {
 
 	// ConfigFlags is a map of additional flags that are passed to the runsc binary used by gVisor.
 	// +optional
-	ConfigFlags *map[string]string `json:"configFlags,omitempty"`
+	ConfigFlags *map[string]interface{} `json:"configFlags,omitempty"`
+}
+
+// DeepCopyObject is a deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *GVisorConfiguration) DeepCopyObject() runtime.Object {
+	out := &GVisorConfiguration{}
+	out.TypeMeta = in.TypeMeta
+	if in.ConfigFlags == nil {
+		return out
+	}
+	configFlags := make(map[string]interface{}, len(*in.ConfigFlags))
+	out.ConfigFlags = &configFlags
+	for key, value := range *in.ConfigFlags {
+		configFlags[key] = value
+	}
+	return out
 }
